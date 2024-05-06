@@ -100,12 +100,16 @@ public class TArbolBB<T> implements IArbolBB<T> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-  @Override
+    @Override
     public void eliminar(Comparable unaEtiqueta) {
         if (!esVacio()) {
-            this.raiz = this.raiz.eliminar(unaEtiqueta);
+            TElementoAB<T> nuevaRaiz = this.raiz.eliminar(unaEtiqueta);
+            if (nuevaRaiz != null) {
+                this.raiz = nuevaRaiz;
+            }
         }
     }
+    
    
 
 }

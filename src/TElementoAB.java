@@ -7,7 +7,7 @@ public class TElementoAB<T> implements IElementoAB<T> {
 
     /**
      * @param unaEtiqueta
-     * @param unosDatos 
+     * @param unosDatos
      */
     @SuppressWarnings("unchecked")
     public TElementoAB(Comparable unaEtiqueta, T unosDatos) {
@@ -77,13 +77,15 @@ public class TElementoAB<T> implements IElementoAB<T> {
      */
     @Override
     public String inOrden() {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
-   @Override
+    @Override
     public void inOrden(Lista<T> unaLista) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
+
     }
 
     @Override
@@ -114,41 +116,84 @@ public class TElementoAB<T> implements IElementoAB<T> {
         this.hijoDer = elemento;
     }
 
-    
-
     @Override
     public int obtenerAltura() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
     public int obtenerTamanio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
     public int obtenerNivel(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
     public int obtenerCantidadHojas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
-    
-     @Override
+
     public TElementoAB eliminar(Comparable unaEtiqueta) {
-              throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (unaEtiqueta.compareTo(etiqueta) < 0) {
+            if (hijoIzq != null) {
+                hijoIzq = hijoIzq.eliminar(unaEtiqueta);
+            }
+            return this;
+        }
+        if (unaEtiqueta.compareTo(etiqueta) > 0) {
+            if (hijoDer != null) {
+                hijoDer = hijoDer.eliminar(unaEtiqueta);
+            }
+            return this;
+        }
+
+        if (hijoIzq == null) {
+            return hijoDer;
+        }
+        if (hijoDer == null) {
+            return hijoIzq;
+        }
+
+        etiqueta = hijoDer.getMinimaClave();
+        datos = hijoDer.getMinimo().getDatos();
+        hijoDer = hijoDer.eliminarMin();
+        return this;
     }
 
-  
-    
- private TElementoAB quitaElNodo() {
-               throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private TElementoAB<T> getMinimo() {
+        if (hijoIzq == null) {
+            return this;
+        } else {
+            return hijoIzq.getMinimo();
+        }
     }
 
+    private TElementoAB<T> eliminarMin() {
+        if (hijoIzq == null) {
+            return hijoDer;
+        }
+        hijoIzq = hijoIzq.eliminarMin();
+        return this;
+    }
 
-   
+    private Comparable getMinimaClave() {
+        if (hijoIzq == null) {
+            return etiqueta;
+        } else {
+            return hijoIzq.getMinimaClave();
+        }
+    }
 
-   	
+    private TElementoAB quitaElNodo() {
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
+    }
+
 }
